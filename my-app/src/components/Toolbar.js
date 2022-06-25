@@ -1,21 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import ShopItemFunc from "./ShopItemFunc";
 
-export default function Toolbar(props) {
-  // const { item } = props;
+let valueSelected;
+let btnSelected; // объект выбранной кнопки фильтра
 
-  const [selected, setSelected] = useState('all');
+document.addEventListener('DOMContentLoaded', () => {
+  if ((btnSelected === undefined)) btnSelected = document.getElementById('myBtnContainer').querySelector('.active'); // объект выбранной кнопки изначально это кнопка "All"
+    console.log('initial btn', btnSelected);
+  }
+);
+
+export default function Toolbar(props) { // компонент кнопок фильтра
+  const { itemsArray } = props;
+
+  const [selected, setSelected] = useState(btnSelected);
+  
   const handleSelect = evt => {
-    setSelected(selected => selected + 1);
+
+    btnSelected.classList.remove('active');
     
+    setSelected((prevSelected) => {
+      prevSelected = evt.target;
+      valueSelected = prevSelected.dataset.selected;
+      btnSelected = prevSelected;
+    });
+
+    btnSelected.classList.add('active');
 };
 
   return (
     // Control buttons
-<div id="myBtnContainer">
-  <button className="btn active" onClick="filterSelection('all')"> All</button>
-  <button className="btn" onClick="filterSelection('websites')"> Websites</button>
-  <button className="btn" onClick="filterSelection('flayers')"> Flayers</button>
-  <button className="btn" onclick="filterSelection('business_cards')"> Business Cards</button>
-</div>
+    <>
+      <div id="myBtnContainer" className="myBtnContainer">
+        <button className="btn active" onClick={handleSelect} data-selected='all'> All</button>
+        <button className="btn " onClick={handleSelect} data-selected='websites'> Websites</button>
+        <button className="btn " onClick={handleSelect} data-selected='flayers'> Flayers</button>
+        <button className="btn " onClick={handleSelect} data-selected='business_cards'> Business Cards</button>
+      </div><div className="container">
+        <ShopItemFunc itemArray={itemsArray} />
+      </div></>
   );
 }

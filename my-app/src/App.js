@@ -1,5 +1,5 @@
+/* eslint-disable react/style-prop-object */
 import "./css/main.css";
-import ShopItemFunc from "./components/ShopItemFunc";
 import Toolbar from "./components/Toolbar";
 
 function App() {
@@ -75,11 +75,8 @@ function App() {
   ];
 
   return ( 
-    <div>
-      <Toolbar />
-      <div className="container">
-        <p>{itemsArray.map(o => <ShopItemFunc itemArray={o} />)}</p>
-      </div>
+    <div className="main">
+      <Toolbar itemsArray={itemsArray} />
     </div>
   );
 }
