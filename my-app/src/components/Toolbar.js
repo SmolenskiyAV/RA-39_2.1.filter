@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShopItemFunc from "./ShopItemFunc";
 
-let valueSelected = 'All'; // днфолтное значение фильтра при первоначальной загрузке страницы
+let valueSelected; // днфолтное значение фильтра при первоначальной загрузке страницы
 let btnSelected; // объект выбранной кнопки фильтра
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,23 +25,13 @@ export default function Toolbar(props) { // компонент кнопок фи
       btnSelected = prevPushed;
     });
 
-    btnSelected.classList.add('active');
+    
     console.log('valueSelected = ', valueSelected); // КОНТРОЛЬНАЯ ТОЧКА (выбранное значение фильтра)
+    setSelected(prevSelected => valueSelected);
+    
+    btnSelected.classList.add('active');
   };
   
-  const handleSelected = valueSelected => { 
-    let result;
-
-    setSelected((prevSelected) => { // обновление состояния выбранного фильтра (НЕ РАБОТАЮЩИЙ КОД!) ...???...
-      prevSelected = valueSelected;
-      result = prevSelected;
-    });
-
-    return result; // попытка вывести значение выбранного фильтра valueSelected.
-  }
-
-  console.log('handleSelected() return: ', handleSelected()); // но функция handleSelected выдаёт  "undefined" (ПОЧЕМУ?)  и в результате в компонент ShopItemFunc ничего не передаётся. 
-
   return (
     // Control buttons
     <>
@@ -51,8 +41,7 @@ export default function Toolbar(props) { // компонент кнопок фи
         <button className="btn " onClick={handlePush} data-selected='Flayers'> Flayers</button>
         <button className="btn " onClick={handlePush} data-selected='Business Cards'> Business Cards</button>
       </div><div className="container">
-        <ShopItemFunc itemArray={itemsArray} onSelected={handleSelected} />
+        <ShopItemFunc itemArray={itemsArray} onSelected={selected} />
       </div></>
-      // попытка передать значение выбранного фильтра в дочерний компонент в стр.54 НЕУДАЧНА.. :/ Почему???
   );
 }

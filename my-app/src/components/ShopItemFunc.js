@@ -7,8 +7,6 @@ export default function ShopItemFunc(props) {
   const { itemArray } = props;
   const { onSelected } = props;
   
-  console.log('onSelected = ', onSelected);
-  console.log('itemArray:', itemArray);
   let filteredArray;
   
     if (onSelected !== "All") {
@@ -17,7 +15,6 @@ export default function ShopItemFunc(props) {
 
     
     console.log("filter length =", filteredArray.length); // КОНТРОЛЬНАЯ ТОЧКА (длина результирующего отфильтрованного массива)
-    console.log("filtered array", filteredArray);
     console.log("===========================================================");
 
    
