@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ShopItemFunc from "./ShopItemFunc";
 
-let valueSelected; // днфолтное значение фильтра при первоначальной загрузке страницы
+let valueSelected; // дуфолтное значение фильтра при первоначальной загрузке страницы
 let btnSelected; // объект выбранной кнопки фильтра
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,19 +13,14 @@ export default function Toolbar(props) { // компонент кнопок фи
   const { itemsArray } = props;
 
   const [selected, setSelected] = useState('All');
-  const [pushed, setPushed] = useState(btnSelected);
-  
-  const handlePush = evt => { // ОБРАБОТЛА НАЖАТИЯ КНОПОК ФИЛЬТРА
+    
+  const handlePush = evt => { // ОБРАБОТКА НАЖАТИЯ КНОПОК ФИЛЬТРА
 
     btnSelected.classList.remove('active');
-    
-    setPushed((prevPushed) => { // обновление состояния нажатой кнопки фильтра (РАБОЧИЙ КОД)
-      prevPushed = evt.target;
-      valueSelected = prevPushed.dataset.selected; // получаем текущее значение фильтра по нажатой кнопке
-      btnSelected = prevPushed;
-    });
-
-    
+        
+    valueSelected = evt.target.dataset.selected; // получаем текущее значение фильтра по нажатой кнопке
+    btnSelected = evt.target;
+       
     console.log('valueSelected = ', valueSelected); // КОНТРОЛЬНАЯ ТОЧКА (выбранное значение фильтра)
     setSelected(prevSelected => valueSelected);
     

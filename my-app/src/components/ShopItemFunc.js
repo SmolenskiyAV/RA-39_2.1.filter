@@ -1,5 +1,4 @@
-/* eslint-disable array-callback-return */
-import React, { useState } from "react";
+import React from "react";
 // import PropTypes from "prop-types";
 // import UserModel from "../models/UserModel";
 
@@ -15,7 +14,7 @@ export default function ShopItemFunc(props) {
 
     
     console.log("filter length =", filteredArray.length); // КОНТРОЛЬНАЯ ТОЧКА (длина результирующего отфильтрованного массива)
-    console.log("===========================================================");
+    console.log("================");
 
    
 
@@ -33,5 +32,6 @@ export default function ShopItemFunc(props) {
 }
 /*
 ShopItemFunc.propTypes = {
-  item: PropTypes.instanceOf(UserModel).isRequired
-}*/
+  itemArray: PropTypes.arrayOf(UserModel).isRequired
+}
+*/
